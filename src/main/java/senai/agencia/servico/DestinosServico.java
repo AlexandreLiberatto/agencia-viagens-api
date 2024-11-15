@@ -18,4 +18,7 @@ public class DestinosServico {
         this.destinosRepositorio = destinosRepositorio;
         this.modelMapper = modelMapper;
     }
+
+    public void cadastrarDestino() {
+    }
 }
