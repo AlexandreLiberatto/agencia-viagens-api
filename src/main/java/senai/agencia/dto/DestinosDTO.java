@@ -11,9 +11,9 @@ public class DestinosDTO { // Classe DTO para controlar tudo que sai para o clie
     private String nome;
     private String localizacao;
     private String informacoesSobreDestino;
-    private Boolean destinosDispiniveis;
-    private Double avaliacoes;
+    private Boolean estaDispinivel;
+    private Double avaliacao;
     private Double mediaAvaliacoes;
-    private Double pacotesViagens;
+    private String pacotesViagens;
     private Double precoPacote;
 }

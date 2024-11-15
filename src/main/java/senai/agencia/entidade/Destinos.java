@@ -19,10 +19,10 @@ public class Destinos {
     private String nome;
     private String localizacao;
     private String informacoesSobreDestino;
-    private Boolean destinosDispiniveis;
-    private Double avaliacoes;
+    private Boolean estaDispinivel;
+    private Double avaliacao;
     private Double mediaAvaliacoes;
-    private Double pacotesViagens;
+    private String pacotesViagens;
     private Double precoPacote;
 
 }
