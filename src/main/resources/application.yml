@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: agencia
+
+  datasource:                       # troque agencia pelo nome do seu banco
+    url: jdbc:postgresql://localhost:5432/agencia?createDatabaseIfNotExist=true # cria o banco de dados caso não exixta
+    username: postgres # seu usuário do banco
+    password: 11janeiro # sua senha do banco
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
