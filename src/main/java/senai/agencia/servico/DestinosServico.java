@@ -1,6 +1,7 @@
 package senai.agencia.servico;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.constraints.NotNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import senai.agencia.dto.DestinosDTO;
@@ -47,4 +48,7 @@ public class DestinosServico {
     }
 
 
+    public void excluir(Long id) {
+        destinosRepositorio.deleteById(id);
+    }
 }

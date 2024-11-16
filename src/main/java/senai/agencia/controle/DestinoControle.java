@@ -40,7 +40,7 @@ public class DestinoControle {
     }
 
     @GetMapping("/{id}")
-    public DestinosDTO buscarPorId(@PathVariable Long id){
+    public DestinosDTO buscarPorId(@PathVariable @NotNull Long id){
 
         return destinosServico.buscarPorId(id);
     }
@@ -49,6 +49,11 @@ public class DestinoControle {
     public DestinosDTO atualizar(@PathVariable @NotNull Long id, @RequestBody @Valid DestinosDTO dto){
         DestinosDTO destinosAtualizado = destinosServico.atuallizarDestino(id, dto);
         return destinosAtualizado;
+    }
+
+    @DeleteMapping("/{id}")
+    public void excluir(@PathVariable @NotNull Long id){
+        destinosServico.excluir(id);
     }
 
 }
