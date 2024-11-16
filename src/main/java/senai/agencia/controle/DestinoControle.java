@@ -1,6 +1,7 @@
 package senai.agencia.controle;
 
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import senai.agencia.dto.DestinosDTO;
 import senai.agencia.servico.DestinosServico;
@@ -25,7 +26,7 @@ public class DestinoControle {
     }
 
     @PostMapping
-    public void cadastrarDestinoViagens(@RequestBody DestinosDTO dto){
+    public void cadastrarDestinoViagens(@RequestBody @Valid DestinosDTO dto){
         destinosServico.cadastrarDestino(dto);
     }
 
