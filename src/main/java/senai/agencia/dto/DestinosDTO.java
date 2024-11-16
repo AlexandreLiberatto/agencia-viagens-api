@@ -28,4 +28,7 @@ public class DestinosDTO { // Classe DTO para controlar tudo que sai para o clie
 
     @Positive // Impede que seja inserido número negativo
     private Double precoPacote;
+
+    @Positive // Impede que seja inserido número negativo
+    private Integer totalAvaliacoes;
 }

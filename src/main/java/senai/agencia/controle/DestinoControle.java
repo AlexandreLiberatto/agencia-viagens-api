@@ -2,6 +2,8 @@ package senai.agencia.controle;
 
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.web.bind.annotation.*;
 import senai.agencia.dto.DestinosDTO;
@@ -41,7 +43,8 @@ public class DestinoControle {
         return destinosServico.listarDestinos();
     }
 
-    //pega um destino pelo ID
+    //pega um destino pelo ID, e mostra informações detalhadas sobre um destino
+    //específico.
     @GetMapping("/{id}")
     public DestinosDTO buscarPorId(@PathVariable @NotNull Long id){
 
@@ -68,6 +71,15 @@ public class DestinoControle {
             @RequestParam(required = false) String localizacao) {
 
         return destinosServico.pesquisarDestinos(nome, localizacao);
+    }
+
+    //EndPoint para inserir uma avaliação e alterar a média das avaliações
+    @PostMapping("/{id}/avaliar")
+    public DestinosDTO avaliarDestino(
+            @PathVariable @NotNull Long id,
+            @RequestParam @DecimalMin("1.0") @DecimalMax("10.0") double nota) {
+
+        return destinosServico.avaliarDestino(id, nota);
     }
 
 }

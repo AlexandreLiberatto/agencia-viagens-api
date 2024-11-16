@@ -25,6 +25,10 @@ public class Destinos {
     private String pacotesViagens;
     private Double precoPacote;
 
+    @Column(nullable = false)
+    private Integer totalAvaliacoes = 0;
+
     public void setId(Long id) {
     }
+
 }
