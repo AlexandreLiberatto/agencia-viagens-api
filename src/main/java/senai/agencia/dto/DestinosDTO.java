@@ -11,6 +11,7 @@ import lombok.Setter;
 @Setter
 public class DestinosDTO { // Classe DTO para controlar tudo que sai para o cliente e tudo que retorna
 
+    private Long id;
     @NotBlank //valida para não ser inseridos dados nulos ou em branco
     private String destinosViagens;
     private String nome;

@@ -2,6 +2,7 @@ package senai.agencia.controle;
 
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.web.bind.annotation.*;
 import senai.agencia.dto.DestinosDTO;
 import senai.agencia.servico.DestinosServico;
@@ -42,6 +43,12 @@ public class DestinoControle {
     public DestinosDTO buscarPorId(@PathVariable Long id){
 
         return destinosServico.buscarPorId(id);
+    }
+
+    @PutMapping("/{id}")
+    public DestinosDTO atualizar(@PathVariable @NotNull Long id, @RequestBody @Valid DestinosDTO dto){
+        DestinosDTO destinosAtualizado = destinosServico.atuallizarDestino(id, dto);
+        return destinosAtualizado;
     }
 
 }

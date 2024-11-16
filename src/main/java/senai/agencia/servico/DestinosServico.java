@@ -24,7 +24,6 @@ public class DestinosServico {
         this.modelMapper = modelMapper;
     }
 
-
     public DestinosDTO cadastrarDestino(DestinosDTO dto) {
         Destinos destinos = modelMapper.map(dto, Destinos.class);
         destinosRepositorio.save(destinos);
@@ -39,5 +38,13 @@ public class DestinosServico {
         Destinos destinos = destinosRepositorio.findById(id).orElseThrow(() -> new EntityNotFoundException());
         return modelMapper.map(destinos, DestinosDTO.class);
     }
+
+    public DestinosDTO atuallizarDestino(Long id, DestinosDTO dto) {
+        Destinos destinos = modelMapper.map(dto, Destinos.class);
+        destinos.setId(id);
+        destinos = destinosRepositorio.save(destinos);
+        return modelMapper.map(destinos, DestinosDTO.class);
+    }
+
 
 }

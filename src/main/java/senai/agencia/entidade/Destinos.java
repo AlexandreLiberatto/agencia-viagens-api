@@ -25,4 +25,6 @@ public class Destinos {
     private String pacotesViagens;
     private Double precoPacote;
 
+    public void setId(Long id) {
+    }
 }
