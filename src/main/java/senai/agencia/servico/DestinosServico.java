@@ -25,21 +25,25 @@ public class DestinosServico {
         this.modelMapper = modelMapper;
     }
 
+    //Cadastra um novo destino no banco
     public DestinosDTO cadastrarDestino(DestinosDTO dto) {
         Destinos destinos = modelMapper.map(dto, Destinos.class);
         destinosRepositorio.save(destinos);
         return modelMapper.map(destinos, DestinosDTO.class);
     }
 
+    //Lista todos os destinos registrados no banco
     public List<DestinosDTO> listarDestinos() {
         return destinosRepositorio.findAll().stream().map(p -> modelMapper.map(p, DestinosDTO.class)).collect(Collectors.toList());
     }
 
+    //Método para buscar um registro por ID
     public DestinosDTO buscarPorId(Long id){
         Destinos destinos = destinosRepositorio.findById(id).orElseThrow(() -> new EntityNotFoundException());
         return modelMapper.map(destinos, DestinosDTO.class);
     }
 
+    //Método para atualizar registro no banco
     public DestinosDTO atuallizarDestino(Long id, DestinosDTO dto) {
         Destinos destinos = modelMapper.map(dto, Destinos.class);
         destinos.setId(id);
@@ -48,7 +52,24 @@ public class DestinosServico {
     }
 
 
+    //Método para excluir registro do banco
     public void excluir(Long id) {
         destinosRepositorio.deleteById(id);
     }
+
+    //Método para pesquisar destinos por nome ou localização
+    public List<DestinosDTO> pesquisarDestinos(String nome, String localizacao) {
+        List<Destinos> resultados;
+
+        if (nome != null && !nome.isEmpty()) {
+            resultados = destinosRepositorio.findByNomeContainingIgnoreCase(nome);
+        } else if (localizacao != null && !localizacao.isEmpty()) {
+            resultados = destinosRepositorio.findByLocalizacaoContainingIgnoreCase(localizacao);
+        } else {
+            throw new IllegalArgumentException("Ops! Insira nome ou localização...");
+        }
+
+        return destinosRepositorio.findAll().stream().map(p -> modelMapper.map(p, DestinosDTO.class)).collect(Collectors.toList());
+    }
+
 }

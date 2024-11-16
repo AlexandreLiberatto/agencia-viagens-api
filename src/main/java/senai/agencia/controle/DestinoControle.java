@@ -27,33 +27,47 @@ public class DestinoControle {
         this.destinosServico = destinosServico;
     }
 
+    //Registra um destino no banco
     @PostMapping
     public void cadastrarDestinoViagens(@RequestBody @Valid DestinosDTO dto){
 
         destinosServico.cadastrarDestino(dto);
     }
 
+    //Lista todos os destinos registrados no banco
     @GetMapping
     public List<DestinosDTO> listarDestinos(){
 
         return destinosServico.listarDestinos();
     }
 
+    //pega um destino pelo ID
     @GetMapping("/{id}")
     public DestinosDTO buscarPorId(@PathVariable @NotNull Long id){
 
         return destinosServico.buscarPorId(id);
     }
 
+    //Atualiza um registro no banco
     @PutMapping("/{id}")
     public DestinosDTO atualizar(@PathVariable @NotNull Long id, @RequestBody @Valid DestinosDTO dto){
         DestinosDTO destinosAtualizado = destinosServico.atuallizarDestino(id, dto);
         return destinosAtualizado;
     }
 
+    //Exclui um registro do banco
     @DeleteMapping("/{id}")
     public void excluir(@PathVariable @NotNull Long id){
         destinosServico.excluir(id);
+    }
+
+    //Pega um destino por nome ou localização
+    @GetMapping("/pesquisar")
+    public List<DestinosDTO> pesquisarDestinos(
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String localizacao) {
+
+        return destinosServico.pesquisarDestinos(nome, localizacao);
     }
 
 }
