@@ -22,17 +22,26 @@ public class DestinoControle {
     private final DestinosServico destinosServico;
 
     public DestinoControle(DestinosServico destinosServico) {
+
         this.destinosServico = destinosServico;
     }
 
     @PostMapping
     public void cadastrarDestinoViagens(@RequestBody @Valid DestinosDTO dto){
+
         destinosServico.cadastrarDestino(dto);
     }
 
     @GetMapping
     public List<DestinosDTO> listarDestinos(){
+
         return destinosServico.listarDestinos();
+    }
+
+    @GetMapping("/{id}")
+    public DestinosDTO buscarPorId(@PathVariable Long id){
+
+        return destinosServico.buscarPorId(id);
     }
 
 }

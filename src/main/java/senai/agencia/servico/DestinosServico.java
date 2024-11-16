@@ -1,5 +1,6 @@
 package senai.agencia.servico;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import senai.agencia.dto.DestinosDTO;
@@ -8,6 +9,8 @@ import senai.agencia.repositorio.DestinosRepositorio;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static senai.agencia.repositorio.DestinosRepositorio.*;
 
 @Service // Informa para o Spring que é uma classe de serviços
 public class DestinosServico {
@@ -30,6 +33,11 @@ public class DestinosServico {
 
     public List<DestinosDTO> listarDestinos() {
         return destinosRepositorio.findAll().stream().map(p -> modelMapper.map(p, DestinosDTO.class)).collect(Collectors.toList());
+    }
+
+    public DestinosDTO buscarPorId(Long id){
+        Destinos destinos = destinosRepositorio.findById(id).orElseThrow(() -> new EntityNotFoundException());
+        return modelMapper.map(destinos, DestinosDTO.class);
     }
 
 }
