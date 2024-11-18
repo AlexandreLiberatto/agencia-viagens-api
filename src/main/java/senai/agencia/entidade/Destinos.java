@@ -28,7 +28,6 @@ public class Destinos {
     @Column(nullable = false)
     private Integer totalAvaliacoes = 0;
 
-    public void setId(Long id) {
-    }
+
 
 }
