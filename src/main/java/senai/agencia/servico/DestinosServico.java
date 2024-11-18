@@ -3,6 +3,8 @@ package senai.agencia.servico;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.constraints.NotNull;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import senai.agencia.dto.DestinosDTO;
 import senai.agencia.entidade.Destinos;
@@ -33,8 +35,10 @@ public class DestinosServico {
     }
 
     //Lista todos os destinos registrados no banco
-    public List<DestinosDTO> listarDestinos() {
-        return destinosRepositorio.findAll().stream().map(p -> modelMapper.map(p, DestinosDTO.class)).collect(Collectors.toList());
+    public Page<DestinosDTO> listarDestinos(Pageable paginacao) {
+        return destinosRepositorio
+                .findAll(paginacao)
+                .map(p -> modelMapper.map(p, DestinosDTO.class));
     }
 
     //pega um destino pelo ID, e mostra informações detalhadas sobre um destino

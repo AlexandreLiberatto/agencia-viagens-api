@@ -5,6 +5,9 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 import senai.agencia.dto.DestinosDTO;
 import senai.agencia.servico.DestinosServico;
@@ -38,9 +41,9 @@ public class DestinoControle {
 
     //Lista todos os destinos registrados no banco
     @GetMapping
-    public List<DestinosDTO> listarDestinos(){
+    public Page<DestinosDTO> listarDestinos(@PageableDefault(size = 10)Pageable paginacao){
 
-        return destinosServico.listarDestinos();
+        return destinosServico.listarDestinos(paginacao);
     }
 
     //pega um destino pelo ID, e mostra informações detalhadas sobre um destino
