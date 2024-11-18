@@ -44,13 +44,18 @@ public class DestinosServico {
         return modelMapper.map(destinos, DestinosDTO.class);
     }
 
-    //Método para atualizar registro no banco
-    public DestinosDTO atuallizarDestino(Long id, DestinosDTO dto) {
-        Destinos destinos = modelMapper.map(dto, Destinos.class);
-        destinos.setId(id);
-        destinos = destinosRepositorio.save(destinos);
-        return modelMapper.map(destinos, DestinosDTO.class);
+    // Método para atualizar registro no banco
+    public DestinosDTO atualizarDestino(Long id, DestinosDTO dto) {
+        Destinos destinoExistente = destinosRepositorio.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Destino com ID " + id + " não encontrado"));
+
+        modelMapper.map(dto, destinoExistente);
+        destinoExistente.setId(id);
+
+        destinoExistente = destinosRepositorio.save(destinoExistente);
+        return modelMapper.map(destinoExistente, DestinosDTO.class);
     }
+
 
 
     //Método para excluir registro do banco

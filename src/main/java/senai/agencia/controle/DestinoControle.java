@@ -53,10 +53,10 @@ public class DestinoControle {
 
     //Atualiza um registro no banco
     @PutMapping("/{id}")
-    public DestinosDTO atualizar(@PathVariable @NotNull Long id, @RequestBody @Valid DestinosDTO dto){
-        DestinosDTO destinosAtualizado = destinosServico.atuallizarDestino(id, dto);
-        return destinosAtualizado;
+    public DestinosDTO atualizar(@PathVariable @NotNull Long id, @RequestBody @Valid DestinosDTO dto) {
+        return destinosServico.atualizarDestino(id, dto);
     }
+
 
     //Exclui um registro do banco
     @DeleteMapping("/{id}")
