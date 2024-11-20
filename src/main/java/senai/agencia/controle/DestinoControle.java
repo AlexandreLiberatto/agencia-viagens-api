@@ -57,8 +57,9 @@ public class DestinoControle {
 
     //Atualiza um registro no banco
     @PutMapping("/{id}")
-    public DestinosDTO atualizar(@PathVariable @NotNull Long id, @RequestBody @Valid DestinosDTO dto) {
-        return destinosServico.atualizarDestino(id, dto);
+    public ResponseEntity<DestinosDTO> atualizar(@PathVariable @NotNull Long id, @RequestBody @Valid DestinosDTO dto) {
+        DestinosDTO destinosatualizado = destinosServico.atualizarDestino(id, dto);
+        return ResponseEntity.ok(destinosatualizado);
     }
 
 
