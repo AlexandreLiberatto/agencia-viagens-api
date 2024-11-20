@@ -79,10 +79,14 @@ public class DestinosServico {
             throw new IllegalArgumentException("Ops! Insira nome ou localização...");
         }
 
-        return destinosRepositorio.findAll().stream().map(p -> modelMapper.map(p, DestinosDTO.class)).collect(Collectors.toList());
+        // Converte para DTO e retorna
+        return resultados.stream()
+                .map(p -> modelMapper.map(p, DestinosDTO.class))
+                .collect(Collectors.toList());
     }
 
-    // Método para inserir uma avaliação e alterar a média das avaliações
+
+    // Método para inserir uma avaliação, atualizar a média e registrar a última avaliação
     public DestinosDTO avaliarDestino(Long id, double novaAvaliacao) {
         if (novaAvaliacao < 1.0 || novaAvaliacao > 10.0) {
             throw new IllegalArgumentException("A avaliação deve estar entre 1.0 e 10.0");
@@ -91,20 +95,22 @@ public class DestinosServico {
         Destinos destino = destinosRepositorio.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Destino não encontrado"));
 
-        // Atualiza média
+        // Atualiza média das avaliações
         double avaliacaoExistente = destino.getMediaAvaliacoes() != null ? destino.getMediaAvaliacoes() : 0.0;
         int totalAvaliacoes = destino.getTotalAvaliacoes() != null ? destino.getTotalAvaliacoes() : 0;
 
         double novaMedia = ((avaliacaoExistente * totalAvaliacoes) + novaAvaliacao) / (totalAvaliacoes + 1);
-
-        // Atualiza avaliações
         destino.setMediaAvaliacoes(novaMedia);
         destino.setTotalAvaliacoes(totalAvaliacoes + 1);
+
+        // Atualiza a última avaliação registrada
+        destino.setAvaliacao(novaAvaliacao);
 
         // Salva alterações
         destinosRepositorio.save(destino);
 
         return modelMapper.map(destino, DestinosDTO.class);
     }
+
 
 }
