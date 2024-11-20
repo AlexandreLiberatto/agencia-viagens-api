@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import senai.agencia.dto.DestinosDTO;
 import senai.agencia.servico.DestinosServico;
@@ -63,8 +64,9 @@ public class DestinoControle {
 
     //Exclui um registro do banco
     @DeleteMapping("/{id}")
-    public void excluir(@PathVariable @NotNull Long id){
+    public ResponseEntity<Void> excluir(@PathVariable @NotNull Long id){
         destinosServico.excluir(id);
+        return ResponseEntity.noContent().build();
     }
 
     //Pega um destino por nome ou localização

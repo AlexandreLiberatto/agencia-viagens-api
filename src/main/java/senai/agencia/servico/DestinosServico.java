@@ -91,7 +91,7 @@ public class DestinosServico {
         Destinos destino = destinosRepositorio.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Destino não encontrado"));
 
-        // Atualizando média
+        // Atualiza média
         double avaliacaoExistente = destino.getMediaAvaliacoes() != null ? destino.getMediaAvaliacoes() : 0.0;
         int totalAvaliacoes = destino.getTotalAvaliacoes() != null ? destino.getTotalAvaliacoes() : 0;
 
