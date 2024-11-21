@@ -1,4 +1,4 @@
-package senai.agencia.usuarios;
+package senai.agencia.usuario;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
