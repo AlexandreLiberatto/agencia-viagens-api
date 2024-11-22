@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import senai.agencia.config.CriptografiaSenha;
 import senai.agencia.dto.DestinosDTO;
 import senai.agencia.entidade.Destinos;
 
@@ -26,6 +27,10 @@ public class UsuarioServico implements UserDetailsService {
     //Cadastra um novo usuário no banco
     public DadosUsuarioCadastro criarUsuario(DadosUsuarioCadastro dto) {
         Usuario usuario = modelMapper.map(dto, Usuario.class);
+        // Criptografando a senha
+        String senhaCriptografada = CriptografiaSenha.criptografia(usuario.getPassword());
+        usuario.setPassword(senhaCriptografada);
+
         repositorio.save(usuario);
         return modelMapper.map(usuario, DadosUsuarioCadastro.class);
     }
