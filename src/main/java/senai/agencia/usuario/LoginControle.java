@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import senai.agencia.config.TokenServico;
 
 @RestController
 @RequestMapping("/login")
@@ -18,12 +19,14 @@ public class LoginControle {
 
     private final AuthenticationManager autenticador;
 
+    private final TokenServico tokenServico;
+
     @PostMapping
-    public ResponseEntity<Void> validacaoCredenciaisUsuario(@RequestBody @Valid CredenciaisUsuarioDTO credenciais){
+    public ResponseEntity validacaoCredenciaisUsuario(@RequestBody @Valid CredenciaisUsuarioDTO credenciais){
         UsernamePasswordAuthenticationToken token =
                 new UsernamePasswordAuthenticationToken(credenciais.getLogin(), credenciais.getPassword());
         Authentication autenticacao = autenticador.authenticate(token);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(tokenServico.criarToken((Usuario) autenticacao.getPrincipal()));
     }
 }
