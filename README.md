@@ -255,3 +255,12 @@ Aqui está um exemplo de como configurar as requisições:
 Sinta-se à vontade para abrir uma issue neste repositório.
 
 --- 
+
+## Contato
+
+Caso tenha alguma dúvida ou precise de suporte, entre em contato:
+
+- **WhatsApp**: +55 48 99160-4054
+- **E-mail**: alexandreliberatto@gmail.com
+- **Portfólio**: [Portfolio Online](https://portfolio-alexandre-jade.vercel.app/)
+- **LinkedIn**: [Perfil LinkedIn](https://www.linkedin.com/in/alexandre-liberato-32179624b/)
