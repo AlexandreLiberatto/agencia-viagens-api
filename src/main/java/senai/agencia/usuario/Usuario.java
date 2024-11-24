@@ -24,9 +24,12 @@ public class Usuario implements UserDetails {
     private String login;
     private  String password;
 
+    @Column(nullable = false)
+    private String role; // "ROLE_USER" ou "ROLE_ADMIN"
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        return List.of(new SimpleGrantedAuthority(role));
     }
 
     @Override

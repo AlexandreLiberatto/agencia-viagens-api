@@ -18,11 +18,10 @@ import senai.agencia.config.TokenServico;
 public class LoginControle {
 
     private final AuthenticationManager autenticador;
-
     private final TokenServico tokenServico;
 
     @PostMapping
-    public ResponseEntity validacaoCredenciaisUsuario(@RequestBody @Valid CredenciaisUsuarioDTO credenciais){
+    public ResponseEntity<String> validacaoCredenciaisUsuario(@RequestBody @Valid CredenciaisUsuarioDTO credenciais) {
         UsernamePasswordAuthenticationToken token =
                 new UsernamePasswordAuthenticationToken(credenciais.getLogin(), credenciais.getPassword());
         Authentication autenticacao = autenticador.authenticate(token);

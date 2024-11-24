@@ -13,4 +13,6 @@ public class DadosUsuarioCadastro {
     private String login;
     @NotBlank
     private String password;
+    @NotBlank
+    private String role;
 }

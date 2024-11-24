@@ -25,9 +25,15 @@ public class Seguranca {
     public SecurityFilterChain filtroSeguranca(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, "/login").permitAll()
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/usuario").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/destinos/**").hasAnyRole("USER", "ADMIN") // Permitir leitura para USER e ADMIN
+                        .requestMatchers(HttpMethod.POST, "/destinos/**").hasRole("ADMIN") // Permitir cadastro apenas para ADMIN
+                        .requestMatchers(HttpMethod.PUT, "/destinos/**").hasRole("ADMIN") // Permitir atualização apenas para ADMIN
+                        .requestMatchers(HttpMethod.DELETE, "/destinos/**").hasRole("ADMIN") // Permitir exclusão apenas para ADMIN
                         .anyRequest().authenticated())
-                        .addFilterBefore(filtros, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(filtros, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
@@ -40,5 +46,4 @@ public class Seguranca {
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
 }

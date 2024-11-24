@@ -13,8 +13,7 @@ import java.time.ZoneOffset;
 @Service
 public class TokenServico {
 
-    public String criarToken(Usuario usuario){
-
+    public String criarToken(Usuario usuario) {
         try {
             Algorithm algoritmo = Algorithm.HMAC256("123");
             LocalDateTime dataExpiracao = LocalDateTime.now().plusHours(2);
@@ -22,13 +21,13 @@ public class TokenServico {
             return JWT.create()
                     .withIssuer("Agencia de Viagens")
                     .withSubject(usuario.getLogin())
+                    .withClaim("role", usuario.getRole()) // Adiciona a função ao token
                     .withExpiresAt(dataExpiracao.toInstant(ZoneOffset.of("-03:00")))
                     .sign(algoritmo);
 
         } catch (JWTCreationException e) {
             throw new RuntimeException("Erro ao criar o token", e);
         }
-
     }
 
     public String buscarUsuarioToken(String token){
