@@ -28,10 +28,10 @@ public class Seguranca {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/usuario").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/destinos/**").hasAnyRole("USER", "ADMIN") // Permitir leitura para USER e ADMIN
-                        .requestMatchers(HttpMethod.POST, "/destinos/**").hasRole("ADMIN") // Permitir cadastro apenas para ADMIN
-                        .requestMatchers(HttpMethod.PUT, "/destinos/**").hasRole("ADMIN") // Permitir atualização apenas para ADMIN
-                        .requestMatchers(HttpMethod.DELETE, "/destinos/**").hasRole("ADMIN") // Permitir exclusão apenas para ADMIN
+                        .requestMatchers(HttpMethod.GET, "/destinos/**").hasAnyRole("USER", "ADMIN") // leitura para USER e ADMIN
+                        .requestMatchers(HttpMethod.POST, "/destinos/**").hasRole("ADMIN") // cadastro apenas para ADMIN
+                        .requestMatchers(HttpMethod.PUT, "/destinos/**").hasRole("ADMIN") // atualização apenas para ADMIN
+                        .requestMatchers(HttpMethod.DELETE, "/destinos/**").hasRole("ADMIN") // exclusão apenas para ADMIN
                         .anyRequest().authenticated())
                 .addFilterBefore(filtros, UsernamePasswordAuthenticationFilter.class);
         return http.build();
