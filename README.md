@@ -1,5 +1,13 @@
 # 🌟 API Agência de Viagens
 
+<!-- Inserir imagem no README -->
+<p align="center">
+  <img src="img/print-agencia1.png" alt="Texto Alternativo" width="800">
+</p>
+<p align="center">
+  <img src="img/print-agencia.png" alt="Texto Alternativo" width="800">
+</p>
+
 Este é um projeto de API para gerenciar destinos de viagens, desenvolvido com **Java**, **Spring Boot**, e **PostgreSQL**. Ele permite operações como cadastro, listagem, atualização e exclusão de destinos, com controle de acesso baseado em roles (usuários com perfil `USER` ou `ADMIN`).
 
 ---
